@@ -18,7 +18,7 @@ namespace UniFood.Utils
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim("active", "1"),
                 new Claim("guid", Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.Role, "Admin")
+                new Claim(ClaimTypes.Role, "User")
             };
 
             var token = new JwtSecurityToken(ConfigUtil.JWTIssuer,

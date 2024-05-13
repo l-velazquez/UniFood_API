@@ -3,17 +3,18 @@ using UniFood.Attributes;
 using UniFood.Models;
 using UniFood.Services;
 using Microsoft.AspNetCore.Authorization;
-using UniFood.Models;
 
 
 namespace UniFood.Controllers
 {
     [ApiController]
+    [Authorize]
     public class UniversitiesController : BaseController
     {
         private readonly ILogger<UniversitiesController> _logger;
         private readonly UniversitiesService _universitiesService;
 
+        
         public UniversitiesController(ILogger<UniversitiesController> logger, UniversitiesService universitiesService)
         {
             _logger = logger;
