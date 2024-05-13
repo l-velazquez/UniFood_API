@@ -18,7 +18,7 @@ namespace UniFood.Services
                 throw new Exception("Invalid password");
             }
             // Add the return statement here
-            return JWTUtil.GenerateJWT(login);
+            return JWTUtil.GenerateJWT(user);
         }
     }
 }

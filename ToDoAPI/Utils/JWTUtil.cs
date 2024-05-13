@@ -8,24 +8,24 @@ namespace UniFood.Utils
 {
     public static class JWTUtil
     {
-        public static string GenerateJWT(Login login)
+        public static string GenerateJWT(User user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigUtil.JWTKey));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             var claims = new[] {
-                new Claim(JwtRegisteredClaimNames.Email, login.Email),
+                new Claim(JwtRegisteredClaimNames.Email, user.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                new Claim("active", "1"),
-                new Claim("guid", Guid.NewGuid().ToString()),
-                new Claim(ClaimTypes.Role, "User")
+                new Claim(ClaimTypes.Role, user.Role) 
             };
 
-            var token = new JwtSecurityToken(ConfigUtil.JWTIssuer,
-                ConfigUtil.JWTAudience,
-                claims,
-                expires: DateTime.Now.AddMinutes(43800),
-                signingCredentials: credentials);
+            var token = new JwtSecurityToken(
+                issuer: ConfigUtil.JWTIssuer,
+                audience: ConfigUtil.JWTAudience,
+                claims: claims,
+                expires: DateTime.UtcNow.AddHours(1),
+                signingCredentials: credentials
+                );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
