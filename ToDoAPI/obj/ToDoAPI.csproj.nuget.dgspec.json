@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "/Users/luis/Documents/GitHub/ToDoAPI 4/ToDoAPI/ToDoAPI.csproj": {}
+    "/home/luis/Documents/GitHub/UniFood_API/ToDoAPI/ToDoAPI.csproj": {}
   },
   "projects": {
-    "/Users/luis/Documents/GitHub/ToDoAPI 4/ToDoAPI/ToDoAPI.csproj": {
+    "/home/luis/Documents/GitHub/UniFood_API/ToDoAPI/ToDoAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/luis/Documents/GitHub/ToDoAPI 4/ToDoAPI/ToDoAPI.csproj",
+        "projectUniqueName": "/home/luis/Documents/GitHub/UniFood_API/ToDoAPI/ToDoAPI.csproj",
         "projectName": "ToDoAPI",
-        "projectPath": "/Users/luis/Documents/GitHub/ToDoAPI 4/ToDoAPI/ToDoAPI.csproj",
-        "packagesPath": "/Users/luis/.nuget/packages/",
-        "outputPath": "/Users/luis/Documents/GitHub/ToDoAPI 4/ToDoAPI/obj/",
+        "projectPath": "/home/luis/Documents/GitHub/UniFood_API/ToDoAPI/ToDoAPI.csproj",
+        "packagesPath": "/home/luis/.nuget/packages/",
+        "outputPath": "/home/luis/Documents/GitHub/UniFood_API/ToDoAPI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/luis/.nuget/NuGet/NuGet.Config"
+          "/home/luis/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
@@ -32,11 +32,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -87,20 +82,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "downloadDependencies": [
-            {
-              "name": "Microsoft.AspNetCore.App.Ref",
-              "version": "[7.0.16, 7.0.16]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Host.osx-arm64",
-              "version": "[7.0.16, 7.0.16]"
-            },
-            {
-              "name": "Microsoft.NETCore.App.Ref",
-              "version": "[7.0.16, 7.0.16]"
-            }
-          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -109,7 +90,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.201/RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/opt/dotnet/sdk/7.0.408/RuntimeIdentifierGraph.json"
         }
       }
     }
