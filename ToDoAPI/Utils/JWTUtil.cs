@@ -2,9 +2,9 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using ToDoAPI.Models;
+using UniFood.Models;
 
-namespace ToDoAPI.Utils
+namespace UniFood.Utils
 {
     public static class JWTUtil
     {
@@ -24,7 +24,7 @@ namespace ToDoAPI.Utils
             var token = new JwtSecurityToken(ConfigUtil.JWTIssuer,
                 ConfigUtil.JWTAudience,
                 claims,
-                expires: DateTime.Now.AddMinutes(60),
+                expires: DateTime.Now.AddMinutes(43800),
                 signingCredentials: credentials);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
