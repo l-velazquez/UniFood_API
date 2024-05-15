@@ -23,6 +23,13 @@ namespace UniFood.Repositories
             User result = (await db.QueryAsync<User>(sqlQuery, new { id })).First();
             return result;
         }
+        public static async Task<User> GetByName(string name)
+        {
+            string sqlQuery = "SELECT * FROM [User] WHERE Name = @Name";
+            using var db = new SqlConnection(ConfigUtil.ConnectionString);
+            User result = (await db.QueryAsync<User>(sqlQuery, new { Name = name })).FirstOrDefault();
+            return result;
+        }
         public static async Task<User> GetByEmail(string email)
         {
             string sqlQuery = "SELECT * FROM [User] WHERE Email = @Email";
@@ -32,9 +39,26 @@ namespace UniFood.Repositories
         }
         public static async Task<User> Post(User user)
         {
-            string sqlQuery = "INSERT INTO [User] ([Email], [Password], [Name], [Role], [Created], [CreatedBy]) VALUES (@Email, @Password, @Name, @Role, @Created, @CreatedBy)";
+            user.RegisteredOn = DateTime.Now;
+            user.LastLogin = DateTime.Now;
+            string sqlQuery = @"
+                INSERT INTO [User] (Role, Email, Password, FirstName, LastName, UniversityId, LastLogin, RegisteredOn)
+                VALUES (@Role, @Email, @Password, @FirstName, @LastName, @UniversityId, @LastLogin, @RegisteredOn);
+                SELECT CAST(SCOPE_IDENTITY() as int)";
+                
             using var db = new SqlConnection(ConfigUtil.ConnectionString);
-            await db.QueryAsync<User>(sqlQuery, user);
+            int newId = await db.ExecuteScalarAsync<int>(sqlQuery, new
+            {
+                user.Role,
+                user.Email,
+                user.Password,
+                user.FirstName,
+                user.LastName,
+                user.UniversityId,
+                user.LastLogin,
+                user.RegisteredOn
+            });
+            user.Id = newId;
             return user;
         }
 
