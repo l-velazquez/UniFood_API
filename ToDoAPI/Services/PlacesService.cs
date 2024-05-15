@@ -5,11 +5,17 @@ namespace UniFood.Services
 {
     public class PlacesService
     {
-        public async Task<Place> Get(int id)
+    
+        public async Task<List<Place>> GetAll()
         {
-            Place place = await PlacesDAO.Get(id);
+            List<Place> places = await PlacesDAO.GetAll();
 
-            return place;
+            return places;
+        }
+        public async Task<List<Place>> Get(int id)
+        {
+            List<Place> places = await PlacesDAO.Get(id);
+            return places;
         }
 
         public async Task<Place> Post(Place place)

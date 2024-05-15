@@ -7,7 +7,7 @@ namespace UniFood.Models
         public string Name { get; set; }
         public string Address { get; set; }
         public string Schedule { get; set; } 
-        public decimal PriceAverage { get; set; } 
+        public string PriceAverage { get; set; } 
         public string Description { get; set; }
         public string ImageUrl { get; set; }
         public string CreatedBy { get; set; }

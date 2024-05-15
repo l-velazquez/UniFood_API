@@ -9,11 +9,18 @@ namespace UniFood.Repositories
 {
     public static class PlacesDAO
     {
-        public static async Task<Place> Get(int id)
+        public static async Task<List<Place>> GetAll()
         {
-            string sqlQuery = "SELECT * FROM [Place] WHERE Id = @id";
+            string sqlQuery = "SELECT * FROM [Place]";
             using var db = new SqlConnection(ConfigUtil.ConnectionString);
-            Place result = (await db.QueryAsync<Place>(sqlQuery, new { id })).First();
+            List<Place> result = (await db.QueryAsync<Place>(sqlQuery)).ToList();
+            return result;
+        }
+        public static async Task<List<Place>> Get(int id)
+        {
+            string sqlQuery = "SELECT * FROM [Place] WHERE UniversityId = @id";
+            using var db = new SqlConnection(ConfigUtil.ConnectionString);
+            List<Place> result = (await db.QueryAsync<Place>(sqlQuery, new { id })).ToList();
             return result;
         }
 

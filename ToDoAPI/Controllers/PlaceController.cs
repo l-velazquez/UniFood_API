@@ -19,6 +19,21 @@ namespace UniFood.Controllers
             _placesService = placesService;
         }
 
+        [HttpGet]
+        public async Task<ActionResult<List<Place>>> GetAll()
+        {
+            try
+            {
+                return Ok(await _placesService.GetAll());
+                
+            }
+            catch (Exception e)
+            {
+                return BadRequest(Content(e.Message, "application/json"));
+                
+            }
+        }
+
         [HttpGet("{id}")] 
         public async Task<ActionResult<List<Place>>> Get(int id)
         {
