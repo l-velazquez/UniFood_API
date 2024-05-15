@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace UniFood.Controllers
 {
-    [ApiController]
 
     public class UserController : BaseController
     {

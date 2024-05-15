@@ -4,7 +4,7 @@ using UniFood.Services;
 
 namespace UniFood.Controllers
 {
-    [ApiController]
+    
     public class LoginController : BaseController
     {
         private readonly LoginService _loginService;

@@ -7,8 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace UniFood.Controllers
 {
-    [ApiController]
-    [Authorize]
     public class UniversitiesController : BaseController
     {
         private readonly ILogger<UniversitiesController> _logger;

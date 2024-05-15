@@ -29,7 +29,7 @@ namespace UniFood.Repositories
         public static async Task<University> Post(University university)
         {
             university.Created = DateTime.Now;
-            string sqlQuery = "INSERT INTO [University] ([Name], Address, Description, Created, CreatedBy) VALUES (@Name, @Address, @Description, @Created, @CreatedBy)";
+            string sqlQuery = "INSERT INTO [University] ([Name], Address, Description, ImageUrl,Created, CreatedBy) VALUES (@Name, @Address, @Description,@ImageUrl, @Created, @CreatedBy)";
             using var db = new SqlConnection(ConfigUtil.ConnectionString);
             await db.QueryAsync<University>(sqlQuery, university);
             return university;
