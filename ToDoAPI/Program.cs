@@ -40,6 +40,7 @@ builder.Services.AddSingleton<LoginService>();
 builder.Services.AddSingleton<UniversitiesService>();
 builder.Services.AddSingleton<PlacesService>();
 builder.Services.AddSingleton<MenusService>();
+builder.Services.AddScoped<UserService>();
 
 
 var app = builder.Build();
