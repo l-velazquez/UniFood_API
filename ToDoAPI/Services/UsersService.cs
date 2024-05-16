@@ -12,6 +12,13 @@ namespace UniFood.Services
             return users;
         }
 
+        public async Task<User> GetByEmail(string email)
+        {
+            User user = await UsersDAO.GetByEmail(email);
+
+            return user;
+        }
+
         public async Task<User> Get(int id)
         {
             User user = await UsersDAO.Get(id);

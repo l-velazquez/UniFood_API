@@ -33,6 +33,21 @@ namespace UniFood.Controllers
             }
         }
 
+        [HttpGet("email/{email}")]
+        public async Task<ActionResult<User>> GetByEmail(string email)
+        {
+            try
+            {
+                return Ok(await _userService.GetByEmail(email));
+                
+            }
+            catch (Exception e)
+            {
+                return BadRequest(Content(e.Message, "application/json"));
+                
+            }
+        }
+
         [HttpGet("{id}")] 
         public async Task<ActionResult<List<User>>> Get(int id)
         {
