@@ -8,36 +8,36 @@ namespace UniFood.Repositories
 {
     public static class UsersDAO
     {
-        public static async Task<List<User>> GetAll()
+        public static async Task<List<Users>> GetAll()
         {
             string sqlQuery = "SELECT * FROM [User]";
             using var db = new SqlConnection(ConfigUtil.ConnectionString);
-            List<User> result = (await db.QueryAsync<User>(sqlQuery)).ToList();
+            List<Users> result = (await db.QueryAsync<Users>(sqlQuery)).ToList();
             return result;
         }
 
-        public static async Task<User> Get(int id)
+        public static async Task<Users> Get(int id)
         {
             string sqlQuery = "SELECT * FROM [User] WHERE Id = @Id";
             using var db = new SqlConnection(ConfigUtil.ConnectionString);
-            User result = (await db.QueryAsync<User>(sqlQuery, new { id })).First();
+            Users result = (await db.QueryAsync<Users>(sqlQuery, new { id })).First();
             return result;
         }
-        public static async Task<User> GetByName(string name)
+        public static async Task<Users> GetByName(string name)
         {
             string sqlQuery = "SELECT * FROM [User] WHERE Name = @Name";
             using var db = new SqlConnection(ConfigUtil.ConnectionString);
-            User result = (await db.QueryAsync<User>(sqlQuery, new { Name = name })).FirstOrDefault();
+            Users result = (await db.QueryAsync<Users>(sqlQuery, new { Name = name })).FirstOrDefault();
             return result;
         }
-        public static async Task<User> GetByEmail(string email)
+        public static async Task<Users> GetByEmail(string email)
         {
             string sqlQuery = "SELECT * FROM [User] WHERE Email = @Email";
             using var db = new SqlConnection(ConfigUtil.ConnectionString);
-            User result = (await db.QueryAsync<User>(sqlQuery, new { email })).First();
+            Users result = (await db.QueryAsync<Users>(sqlQuery, new { email })).First();
             return result;
         }
-        public static async Task<User> Post(User user)
+        public static async Task<Users> Post(Users user)
         {
             user.RegisteredOn = DateTime.Now;
             user.LastLogin = DateTime.Now;
@@ -62,19 +62,19 @@ namespace UniFood.Repositories
             return user;
         }
 
-        public static async Task<User> Put(User user)
+        public static async Task<Users> Put(Users user)
         {
             string sqlQuery = "UPDATE [User] SET Email = @Email, Password = @Password, Name = @Name, Role = @Role, Created = @Created, CreatedBy = @CreatedBy WHERE Id = @Id";
             using var db = new SqlConnection(ConfigUtil.ConnectionString);
-            await db.QueryAsync<User>(sqlQuery, user);
+            await db.QueryAsync<Users>(sqlQuery, user);
             return user;
         }
 
-        public static async Task<User> Delete(int id)
+        public static async Task<Users> Delete(int id)
         {
             string sqlQuery = "DELETE FROM [User] WHERE Id = @id";
             using var db = new SqlConnection(ConfigUtil.ConnectionString);
-            await db.QueryAsync<User>(sqlQuery, new { id });
+            await db.QueryAsync<Users>(sqlQuery, new { id });
             return null;
         }
     }

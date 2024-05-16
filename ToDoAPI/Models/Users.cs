@@ -2,7 +2,7 @@ using System;
 
 namespace UniFood.Models
 {
-    public class User
+    public class Users
     {
         public int Id { get; set; }
         public string Role { get; set; }

@@ -8,7 +8,7 @@ namespace UniFood.Utils
 {
     public static class JWTUtil
     {
-        public static string GenerateJWT(User user)
+        public static string GenerateJWT(Users user)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(ConfigUtil.JWTKey));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);

@@ -5,40 +5,40 @@ namespace UniFood.Services
 {
     public class UserService
     {
-        public async Task<List<User>> GetAll()
+        public async Task<List<Users>> GetAll()
         {
-            List<User> users = await UsersDAO.GetAll();
+            List<Users> users = await UsersDAO.GetAll();
 
             return users;
         }
 
-        public async Task<User> GetByEmail(string email)
+        public async Task<Users> GetByEmail(string email)
         {
-            User user = await UsersDAO.GetByEmail(email);
+            Users user = await UsersDAO.GetByEmail(email);
 
             return user;
         }
 
-        public async Task<User> Get(int id)
+        public async Task<Users> Get(int id)
         {
-            User user = await UsersDAO.Get(id);
+            Users user = await UsersDAO.Get(id);
 
             return user;
         }
 
-        public async Task<User> Post(User user)
+        public async Task<Users> Post(Users user)
         {
             await UsersDAO.Post(user);
 
             return user;
         }
 
-        public async Task<User> Put(User user)
+        public async Task<Users> Put(Users user)
         {
             return await UsersDAO.Put(user);
         }
 
-        public async Task<User> Delete(int id)
+        public async Task<Users> Delete(int id)
         {
             return await UsersDAO.Delete(id);
         }

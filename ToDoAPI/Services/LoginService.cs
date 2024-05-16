@@ -8,7 +8,7 @@ namespace UniFood.Services
     {
         public async Task<string> LoginAsync(Login login)
         {
-            User user = await UsersDAO.GetByEmail(login.Email);
+            Users user = await UsersDAO.GetByEmail(login.Email);
             if (user == null)
             {
                 throw new Exception("User not found");

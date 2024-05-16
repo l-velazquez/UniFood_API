@@ -7,19 +7,19 @@ using Microsoft.AspNetCore.Authorization;
 namespace UniFood.Controllers
 {
 
-    public class UserController : BaseController
+    public class UsersController : BaseController
     {
-        private readonly ILogger<UserController> _logger;
+        private readonly ILogger<UsersController> _logger;
         private readonly UserService _userService;
 
-        public UserController(ILogger<UserController> logger, UserService userService)
+        public UsersController(ILogger<UsersController> logger, UserService userService)
         {
             _logger = logger;
             _userService = userService;
         }
 
         [HttpGet]
-        public async Task<ActionResult<List<User>>> GetAll()
+        public async Task<ActionResult<List<Users>>> GetAll()
         {
             try
             {
@@ -34,7 +34,7 @@ namespace UniFood.Controllers
         }
 
         [HttpGet("email/{email}")]
-        public async Task<ActionResult<User>> GetByEmail(string email)
+        public async Task<ActionResult<Users>> GetByEmail(string email)
         {
             try
             {
@@ -49,7 +49,7 @@ namespace UniFood.Controllers
         }
 
         [HttpGet("{id}")] 
-        public async Task<ActionResult<List<User>>> Get(int id)
+        public async Task<ActionResult<List<Users>>> Get(int id)
         {
             try
             {
@@ -64,7 +64,7 @@ namespace UniFood.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<User>> Post(User user)
+        public async Task<ActionResult<Users>> Post(Users user)
         {
             try
             {
@@ -79,7 +79,7 @@ namespace UniFood.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult<User>> Put(User user)
+        public async Task<ActionResult<Users>> Put(Users user)
         {
             try
             {
@@ -94,7 +94,7 @@ namespace UniFood.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<ActionResult<User>> Delete(int id)
+        public async Task<ActionResult<Users>> Delete(int id)
         {
             try
             {
