@@ -16,12 +16,23 @@ namespace UniFood.Repositories
             List<Place> result = (await db.QueryAsync<Place>(sqlQuery)).ToList();
             return result;
         }
-        public static async Task<List<Place>> Get(int id)
+        
+        public static async Task<List<Place>> Get(int universityId, int? placeId = null)
         {
-            string sqlQuery = "SELECT * FROM [Place] WHERE UniversityId = @id";
-            using var db = new SqlConnection(ConfigUtil.ConnectionString);
-            List<Place> result = (await db.QueryAsync<Place>(sqlQuery, new { id })).ToList();
-            return result;
+            string sqlQuery;
+            if (placeId.HasValue)
+            {
+                sqlQuery = "SELECT * FROM [Place] WHERE UniversityId = @universityId AND Id = @placeId";
+                using var db = new SqlConnection(ConfigUtil.ConnectionString);
+                var place = await db.QuerySingleOrDefaultAsync<Place>(sqlQuery, new { universityId, placeId });
+                return place == null ? new List<Place>() : new List<Place> { place };
+            }
+            else
+            {
+                sqlQuery = "SELECT * FROM [Place] WHERE UniversityId = @universityId";
+                using var db = new SqlConnection(ConfigUtil.ConnectionString);
+                return (await db.QueryAsync<Place>(sqlQuery, new { universityId })).ToList();
+            }
         }
 
         public static async Task<Place> Post(Place place)

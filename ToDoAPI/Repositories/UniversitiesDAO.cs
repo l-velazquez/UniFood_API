@@ -40,7 +40,7 @@ namespace UniFood.Repositories
             try
             {
                 university.Modified = DateTime.Now; // Update the 'Modified' timestamp
-                string sqlQuery = "UPDATE [University] SET Name = @Name, Description = @Description, CategoryId = @CategoryId, Modified = @Modified, ModifiedBy = @ModifiedBy WHERE Id = @Id";
+                string sqlQuery = "UPDATE [University] SET Name = @Name, Description = @Description, ImageUrl = @ImageUrl, CategoryId = @CategoryId, Modified = @Modified, ModifiedBy = @ModifiedBy , Created = @Created, CreatedBy = @CreatedBy WHERE Id = @Id";
 
                 using var db = new SqlConnection(ConfigUtil.ConnectionString);
                 int affectedRows = await db.ExecuteAsync(sqlQuery, university); 

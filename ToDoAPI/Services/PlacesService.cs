@@ -12,12 +12,11 @@ namespace UniFood.Services
 
             return places;
         }
-        public async Task<List<Place>> Get(int id)
+        public async Task<List<Place>> Get(int universityId, int? placeId = null)
         {
-            List<Place> places = await PlacesDAO.Get(id);
+            List<Place> places = await PlacesDAO.Get(universityId, placeId);
             return places;
         }
-
         public async Task<Place> Post(Place place)
         {
             await PlacesDAO.Post(place);

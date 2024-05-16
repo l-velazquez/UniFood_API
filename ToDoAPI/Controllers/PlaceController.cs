@@ -34,20 +34,36 @@ namespace UniFood.Controllers
             }
         }
 
-        [HttpGet("{id}")] 
-        public async Task<ActionResult<List<Place>>> Get(int id)
+        [HttpGet("{universityId}")]
+        public async Task<ActionResult<List<Place>>> GetPlaces(int universityId, [FromQuery] int? placeId = null)
         {
             try
             {
-                return Ok(await _placesService.Get(id));
-                
+                var places = await _placesService.Get(universityId, placeId);
+                if (placeId.HasValue)
+                {
+                    var place = places.SingleOrDefault();
+                    if (place == null)
+                    {
+                        return NotFound();
+                    }
+                    return Ok(place);
+                }
+                else
+                {
+                    if (places == null || places.Count == 0)
+                    {
+                        return NotFound();
+                    }
+                    return Ok(places);
+                }
             }
             catch (Exception e)
             {
-                return BadRequest(Content(e.Message, "application/json"));
-                
+                return BadRequest(new { message = e.Message });
             }
         }
+
 
         [HttpPost]
         public async Task<ActionResult<Place>> Post(Place place)
