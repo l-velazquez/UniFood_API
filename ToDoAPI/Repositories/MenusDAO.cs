@@ -11,7 +11,7 @@ namespace UniFood.Repositories
     {
         public static async Task<Menu> Get(int id)
         {
-            string sqlQuery = "SELECT * FROM [Menu] WHERE Id = @id";
+            string sqlQuery = "SELECT * FROM [Menu] WHERE Id = @PlaceId";
             using var db = new SqlConnection(ConfigUtil.ConnectionString);
             Menu result = (await db.QueryAsync<Menu>(sqlQuery, new { id })).First();
             return result;
