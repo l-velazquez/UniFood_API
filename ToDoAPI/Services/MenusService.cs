@@ -5,10 +5,10 @@ namespace UniFood.Services
 {
     public class MenusService
     {
-        public async Task<Menu> Get(int id)
+        public async Task<List<Menu>> Get(int id)
         {
-            Menu menu = await MenusDAO.Get(id);
-
+            List<Menu> menu = await MenusDAO.Get(id);
+            
             return menu;
         }
 
