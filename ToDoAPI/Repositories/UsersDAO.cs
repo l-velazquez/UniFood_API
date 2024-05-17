@@ -49,11 +49,25 @@ namespace UniFood.Repositories
 
         public static async Task<Users> Put(Users user)
         {
-            string sqlQuery = "UPDATE [User] SET Email = @Email, Password = @Password, Name = @Name, Role = @Role, Created = @Created, CreatedBy = @CreatedBy WHERE Id = @Id";
+            string sqlQuery = @"
+                UPDATE [User]
+                SET 
+                    Role = @Role,
+                    Email = @Email,
+                    Password = @Password,
+                    FirstName = @FirstName,
+                    LastName = @LastName,
+                    UniversityId = @UniversityId,
+                    LastLogin = @LastLogin,
+                    RegisteredOn = @RegisteredOn
+                WHERE 
+                    Id = @Id";
+
             using var db = new SqlConnection(ConfigUtil.ConnectionString);
-            await db.QueryAsync<Users>(sqlQuery, user);
+            await db.ExecuteAsync(sqlQuery, user);
             return user;
         }
+
 
         public static async Task<Users> Delete(int id)
         {
