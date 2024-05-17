@@ -40,20 +40,43 @@ namespace UniFood.Repositories
             try
             {
                 university.Modified = DateTime.Now; // Update the 'Modified' timestamp
-                string sqlQuery = "UPDATE [University] SET Name = @Name, Description = @Description, ImageUrl = @ImageUrl, CategoryId = @CategoryId, Modified = @Modified, ModifiedBy = @ModifiedBy , Created = @Created, CreatedBy = @CreatedBy WHERE Id = @Id";
+
+                string sqlQuery = @"
+                    UPDATE [University] 
+                    SET 
+                        Name = @Name, 
+                        Address = @Address, 
+                        Description = @Description, 
+                        ImageUrl = @ImageUrl, 
+                        Modified = @Modified, 
+                        ModifiedBy = @ModifiedBy, 
+                        Created = @Created, 
+                        CreatedBy = @CreatedBy 
+                    WHERE Id = @Id";
 
                 using var db = new SqlConnection(ConfigUtil.ConnectionString);
-                int affectedRows = await db.ExecuteAsync(sqlQuery, university); 
+                Console.WriteLine($"Executing query: {sqlQuery} with parameters: {Newtonsoft.Json.JsonConvert.SerializeObject(university)}");
+
+                int affectedRows = await db.ExecuteAsync(sqlQuery, university);
+
+                Console.WriteLine($"Rows affected: {affectedRows}");
                 
                 return affectedRows > 0; // Return true if the update was successful
             }
-            catch (Exception e)
+            catch (SqlException sqlEx)
             {
-                // Log the exception details 
-                Console.WriteLine(e.Message);
-                return false; 
+                // Log SQL-specific exception details
+                Console.WriteLine($"SQL Error: {sqlEx.Message}");
+                return false;
+            }
+            catch (Exception ex)
+            {
+                // Log general exception details
+                Console.WriteLine($"General Error: {ex.Message}");
+                return false;
             }
         }
+
 
         public static async Task<bool> Delete(int universityId)
         {

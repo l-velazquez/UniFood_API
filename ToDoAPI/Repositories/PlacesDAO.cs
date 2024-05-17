@@ -49,18 +49,43 @@ namespace UniFood.Repositories
             try
             {
                 place.Modified = DateTime.Now; // Update the 'Modified' timestamp
-                string sqlQuery = "UPDATE [Place] SET Name = @Name, Description = @Description, CategoryId = @CategoryId, Modified = @Modified, ModifiedBy = @ModifiedBy WHERE Id = @Id";
+
+                string sqlQuery = @"
+                    UPDATE [Place] 
+                    SET 
+                        UniversityId = @UniversityId, 
+                        Name = @Name, 
+                        Address = @Address, 
+                        Schedule = @Schedule, 
+                        PriceAverage = @PriceAverage, 
+                        Description = @Description, 
+                        ImageUrl = @ImageUrl, 
+                        CreatedBy = @CreatedBy, 
+                        Created = @Created, 
+                        ModifiedBy = @ModifiedBy, 
+                        Modified = @Modified 
+                    WHERE Id = @Id";
 
                 using var db = new SqlConnection(ConfigUtil.ConnectionString);
-                int affectedRows = await db.ExecuteAsync(sqlQuery, place); 
+                Console.WriteLine($"Executing query: {sqlQuery} with parameters: {Newtonsoft.Json.JsonConvert.SerializeObject(place)}");
+
+                int affectedRows = await db.ExecuteAsync(sqlQuery, place);
+
+                Console.WriteLine($"Rows affected: {affectedRows}");
                 
                 return affectedRows > 0; // Return true if the update was successful
             }
-            catch (Exception e)
+            catch (SqlException sqlEx)
             {
-                // Log the exception details 
-                Console.WriteLine(e.Message);
-                return false; 
+                // Log SQL-specific exception details
+                Console.WriteLine($"SQL Error: {sqlEx.Message}");
+                return false;
+            }
+            catch (Exception ex)
+            {
+                // Log general exception details
+                Console.WriteLine($"General Error: {ex.Message}");
+                return false;
             }
         }
 
