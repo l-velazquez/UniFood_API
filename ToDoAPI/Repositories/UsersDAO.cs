@@ -41,24 +41,9 @@ namespace UniFood.Repositories
         {
             user.RegisteredOn = DateTime.Now;
             user.LastLogin = DateTime.Now;
-            string sqlQuery = @"
-                INSERT INTO [User] (Role, Email, Password, FirstName, LastName, UniversityId, LastLogin, RegisteredOn)
-                VALUES (@Role, @Email, @Password, @FirstName, @LastName, @UniversityId, @LastLogin, @RegisteredOn);
-                SELECT CAST(SCOPE_IDENTITY() as int)";
-                
+            string sqlQuery = "INSERT INTO [User] (Role, Email, Password, FirstName, LastName, UniversityId, LastLogin, RegisteredOn) VALUES (@Role, @Email, @Password, @FirstName, @LastName, @UniversityId, @LastLogin, @RegisteredOn); SELECT CAST(SCOPE_IDENTITY() as int)";
             using var db = new SqlConnection(ConfigUtil.ConnectionString);
-            int newId = await db.ExecuteScalarAsync<int>(sqlQuery, new
-            {
-                user.Role,
-                user.Email,
-                user.Password,
-                user.FirstName,
-                user.LastName,
-                user.UniversityId,
-                user.LastLogin,
-                user.RegisteredOn
-            });
-            user.Id = newId;
+            await db.QueryAsync<Users>(sqlQuery, user);
             return user;
         }
 
