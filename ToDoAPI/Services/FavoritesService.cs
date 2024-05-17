@@ -12,9 +12,9 @@ namespace UniFood.Services
             return favorites;
         }
 
-        public async Task<Favorite> Get(int id)
+        public async Task<List<Favorite>> Get(int id)
         {
-            Favorite favorite = await FavoritesDAO.Get(id);
+            List<Favorite>favorite = await FavoritesDAO.Get(id);
 
             return favorite;
         }

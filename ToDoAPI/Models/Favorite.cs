@@ -9,6 +9,6 @@ namespace UniFood.Models
         [Required]
         public int UserId { get; set; }
         [Required]
-        public int RestaurantId { get; set; }
+        public int PlaceId { get; set; }
     }
 }

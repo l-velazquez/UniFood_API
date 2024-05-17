@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace UniFood.Controllers
 {
-    [ApiController]
     public class FavoritesController : BaseController
     {
         private readonly ILogger<FavoritesController> _logger;

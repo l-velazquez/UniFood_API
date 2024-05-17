@@ -41,6 +41,7 @@ builder.Services.AddSingleton<UniversitiesService>();
 builder.Services.AddSingleton<PlacesService>();
 builder.Services.AddSingleton<MenusService>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<FavoritesService>();
 
 
 var app = builder.Build();
