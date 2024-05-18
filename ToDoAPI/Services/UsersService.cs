@@ -12,6 +12,11 @@ namespace UniFood.Services
             return users;
         }
 
+        public async Task<List<Users>> GetPaginated(int pageNumber, int pageSize)
+        {
+            return await UsersDAO.GetPaginated(pageNumber, pageSize);
+        }
+
         public async Task<Users> GetByEmail(string email)
         {
             Users user = await UsersDAO.GetByEmail(email);

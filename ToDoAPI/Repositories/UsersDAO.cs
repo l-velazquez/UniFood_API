@@ -16,6 +16,14 @@ namespace UniFood.Repositories
             return result;
         }
 
+        public static async Task<List<Users>> GetPaginated(int pageNumber, int pageSize)
+        {
+            string sqlQuery = "SELECT * FROM [User] ORDER BY Id OFFSET @Offset ROWS FETCH NEXT @PageSize ROWS ONLY";
+            using var db = new SqlConnection(ConfigUtil.ConnectionString);
+            var result = await db.QueryAsync<Users>(sqlQuery, new { Offset = (pageNumber - 1) * pageSize, PageSize = pageSize });
+            return result.ToList();
+        }
+
         public static async Task<Users> Get(int id)
         {
             string sqlQuery = "SELECT * FROM [User] WHERE Id = @Id";
