@@ -33,6 +33,19 @@ namespace UniFood.Controllers
             }
         }
 
+        [HttpGet("paginated")]
+        public async Task<ActionResult<List<Users>>> GetPaginated([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
+        {
+            try
+            {
+                return Ok(await _userService.GetPaginated(pageNumber, pageSize));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(Content(e.Message, "application/json"));
+            }
+        }
+
         [HttpGet("email/{email}")]
         public async Task<ActionResult<Users>> GetByEmail(string email)
         {
